@@ -8,8 +8,6 @@ st.write("Cu ce informatie va pot ajuta?")
 # User input
 query = st.text_input("Intrebare:")
 
-OPENAI_API_KEY = st.secrets["api"]["openai_key"]
-
 # Only run if the user enters a query
 if query:
     # Load LlamaCloudIndex
