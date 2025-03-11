@@ -1,6 +1,7 @@
 import streamlit as st
 from llama_index.indices.managed.llama_cloud import LlamaCloudIndex
 from llama_index.core.chat_engine import CondensePlusContextChatEngine
+from llama_index.core.memory import ChatMemoryBuffer
 
 # Streamlit UI
 st.title("ASF Chatbot")
@@ -15,9 +16,11 @@ index = LlamaCloudIndex(
 )
 
 # Initialize chat engine
+memory = ChatMemoryBuffer.from_defaults(token_limit=10000)
 chat_engine = CondensePlusContextChatEngine.from_defaults(
     index.as_retriever(),
     chat_mode="condense_plus_context",
+    memory = memory,
     context_prompt=(
         "Ești un chatbot specializat în legislație și reglementări din domeniul financiar, "
         "emis de Autoritatea de Supraveghere Financiară (ASF) din România. "
